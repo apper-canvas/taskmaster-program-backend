@@ -42,8 +42,14 @@ export default function ProjectCard({
               {project.name}
             </CardTitle>
             <p className="text-sm text-slate-600 line-clamp-2">
-              {project.description}
+{project.description}
             </p>
+            {project.assignee && (
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-slate-100">
+                <ApperIcon name="User" className="h-4 w-4 text-slate-500" />
+                <span className="text-sm text-slate-600">{project.assignee}</span>
+              </div>
+            )}
           </div>
           
           <div className="flex items-center gap-2">

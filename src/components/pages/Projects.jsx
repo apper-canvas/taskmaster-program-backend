@@ -23,11 +23,12 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [modalLoading, setModalLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     name: "",
     description: "",
     color: "#3b82f6",
-    dueDate: ""
+    dueDate: "",
+    assignee: ""
   });
 
   const loadData = async () => {
@@ -53,24 +54,26 @@ export default function Projects() {
     loadData();
   }, []);
 
-  const handleCreateProject = () => {
+const handleCreateProject = () => {
     setSelectedProject(null);
     setFormData({
       name: "",
       description: "",
       color: "#3b82f6",
-      dueDate: ""
+      dueDate: "",
+      assignee: ""
     });
     setIsModalOpen(true);
   };
 
-  const handleEditProject = (project) => {
+const handleEditProject = (project) => {
     setSelectedProject(project);
     setFormData({
       name: project.name,
       description: project.description,
       color: project.color,
-      dueDate: project.dueDate || ""
+      dueDate: project.dueDate || "",
+      assignee: project.assignee || ""
     });
     setIsModalOpen(true);
   };
@@ -230,14 +233,20 @@ export default function Projects() {
                 placeholder="Describe the project..."
                 className="min-h-20"
               />
-
-              <FormField
+<FormField
                 label="Due Date"
                 type="date"
                 value={formData.dueDate}
                 onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
               />
 
+              <FormField
+                label="Assignee"
+                type="text"
+                placeholder="Enter team member name"
+                value={formData.assignee}
+                onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
+              />
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700">
                   Project Color

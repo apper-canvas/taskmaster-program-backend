@@ -1,11 +1,12 @@
 [
-  {
+{
     "Id": 1,
     "name": "Mobile App Redesign",
     "description": "Complete overhaul of the mobile application UI/UX with modern design principles and improved user experience",
     "color": "#3b82f6",
     "dueDate": "2024-03-15",
     "createdAt": "2024-01-10",
+    "assignee": "Sarah Johnson",
     "tasks": [1, 2, 3, 6, 8]
   },
   {
@@ -15,6 +16,7 @@
     "color": "#10b981",
     "dueDate": "2024-04-01",
     "createdAt": "2024-01-15",
+    "assignee": "Michael Chen",
     "tasks": [4, 9]
   },
   {
@@ -24,6 +26,7 @@
     "color": "#f59e0b",
     "dueDate": "2024-02-28",
     "createdAt": "2024-01-20",
+    "assignee": "Emily Rodriguez",
     "tasks": [5]
   },
   {
@@ -33,6 +36,7 @@
     "color": "#8b5cf6",
     "dueDate": "2024-06-30",
     "createdAt": "2024-01-05",
+    "assignee": "David Kim",
     "tasks": [7, 10]
   },
   {
@@ -42,6 +46,7 @@
     "color": "#ef4444",
     "dueDate": "2024-05-15",
     "createdAt": "2024-01-12",
+    "assignee": "Jessica Liu",
     "tasks": []
   },
   {
@@ -51,6 +56,7 @@
     "color": "#06b6d4",
     "dueDate": "2024-03-30",
     "createdAt": "2024-01-18",
+    "assignee": "Alex Thompson",
     "tasks": []
   }
 ]
