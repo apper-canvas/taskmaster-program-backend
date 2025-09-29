@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "name": "Mobile App Redesign",
+    "description": "Complete overhaul of the mobile application UI/UX with modern design principles and improved user experience",
+    "color": "#3b82f6",
+    "dueDate": "2024-03-15",
+    "createdAt": "2024-01-10",
+    "tasks": [1, 2, 3, 6, 8]
+  },
+  {
+    "Id": 2,
+    "name": "Product Launch Strategy",
+    "description": "Comprehensive go-to-market strategy for the new product line including market research, competitive analysis, and marketing campaigns",
+    "color": "#10b981",
+    "dueDate": "2024-04-01",
+    "createdAt": "2024-01-15",
+    "tasks": [4, 9]
+  },
+  {
+    "Id": 3,
+    "name": "Website Refresh",
+    "description": "Update website content, improve SEO, and enhance overall digital presence",
+    "color": "#f59e0b",
+    "dueDate": "2024-02-28",
+    "createdAt": "2024-01-20",
+    "tasks": [5]
+  },
+  {
+    "Id": 4,
+    "name": "Operations & Management",
+    "description": "General business operations, team coordination, and strategic planning initiatives",
+    "color": "#8b5cf6",
+    "dueDate": "2024-06-30",
+    "createdAt": "2024-01-05",
+    "tasks": [7, 10]
+  },
+  {
+    "Id": 5,
+    "name": "Customer Analytics Platform",
+    "description": "Development of advanced analytics dashboard for customer behavior tracking and insights",
+    "color": "#ef4444",
+    "dueDate": "2024-05-15",
+    "createdAt": "2024-01-12",
+    "tasks": []
+  },
+  {
+    "Id": 6,
+    "name": "Security Audit & Compliance",
+    "description": "Comprehensive security review and compliance implementation for enterprise standards",
+    "color": "#06b6d4",
+    "dueDate": "2024-03-30",
+    "createdAt": "2024-01-18",
+    "tasks": []
+  }
+]

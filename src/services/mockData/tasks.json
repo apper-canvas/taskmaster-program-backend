@@ -1,0 +1,192 @@
+[
+  {
+    "Id": 1,
+    "title": "Design user interface mockups",
+    "description": "Create comprehensive UI mockups for the mobile app redesign project including all core screens and user flows",
+    "status": "In Progress",
+    "priority": "High",
+    "dueDate": "2024-01-28",
+    "projectId": 1,
+    "tags": ["design", "UI", "mobile"],
+    "estimatedTime": 16,
+    "actualTime": 8,
+    "subtasks": [
+      { "id": 1, "title": "Research current design trends", "completed": true },
+      { "id": 2, "title": "Create wireframes", "completed": true },
+      { "id": 3, "title": "Design high-fidelity mockups", "completed": false }
+    ],
+    "createdAt": "2024-01-20",
+    "completedAt": null
+  },
+  {
+    "Id": 2,
+    "title": "Implement user authentication",
+    "description": "Set up secure user authentication system with JWT tokens and proper session management",
+    "status": "To Do",
+    "priority": "High",
+    "dueDate": "2024-02-05",
+    "projectId": 1,
+    "tags": ["development", "security", "backend"],
+    "estimatedTime": 12,
+    "actualTime": 0,
+    "subtasks": [
+      { "id": 1, "title": "Set up JWT library", "completed": false },
+      { "id": 2, "title": "Create login endpoints", "completed": false },
+      { "id": 3, "title": "Implement session middleware", "completed": false }
+    ],
+    "createdAt": "2024-01-22",
+    "completedAt": null
+  },
+  {
+    "Id": 3,
+    "title": "Write comprehensive documentation",
+    "description": "Create detailed API documentation and user guides for the new platform features",
+    "status": "Completed",
+    "priority": "Medium",
+    "dueDate": "2024-01-25",
+    "projectId": 1,
+    "tags": ["documentation", "API", "guides"],
+    "estimatedTime": 8,
+    "actualTime": 10,
+    "subtasks": [
+      { "id": 1, "title": "Document API endpoints", "completed": true },
+      { "id": 2, "title": "Create user guides", "completed": true },
+      { "id": 3, "title": "Review and publish", "completed": true }
+    ],
+    "createdAt": "2024-01-15",
+    "completedAt": "2024-01-25"
+  },
+  {
+    "Id": 4,
+    "title": "Conduct market research analysis",
+    "description": "Analyze competitor strategies and market trends to inform product positioning and feature prioritization",
+    "status": "In Progress",
+    "priority": "Medium",
+    "dueDate": "2024-02-10",
+    "projectId": 2,
+    "tags": ["research", "market", "strategy"],
+    "estimatedTime": 20,
+    "actualTime": 6,
+    "subtasks": [
+      { "id": 1, "title": "Identify key competitors", "completed": true },
+      { "id": 2, "title": "Analyze pricing strategies", "completed": false },
+      { "id": 3, "title": "Create competitive matrix", "completed": false }
+    ],
+    "createdAt": "2024-01-25",
+    "completedAt": null
+  },
+  {
+    "Id": 5,
+    "title": "Update website content",
+    "description": "Refresh homepage content, update product descriptions, and optimize for SEO",
+    "status": "To Do",
+    "priority": "Low",
+    "dueDate": "2024-02-15",
+    "projectId": 3,
+    "tags": ["content", "SEO", "website"],
+    "estimatedTime": 6,
+    "actualTime": 0,
+    "subtasks": [
+      { "id": 1, "title": "Audit current content", "completed": false },
+      { "id": 2, "title": "Write new copy", "completed": false },
+      { "id": 3, "title": "Optimize for keywords", "completed": false }
+    ],
+    "createdAt": "2024-01-26",
+    "completedAt": null
+  },
+  {
+    "Id": 6,
+    "title": "Set up CI/CD pipeline",
+    "description": "Implement automated testing and deployment pipeline for faster and more reliable releases",
+    "status": "Blocked",
+    "priority": "High",
+    "dueDate": "2024-02-01",
+    "projectId": 1,
+    "tags": ["DevOps", "automation", "testing"],
+    "estimatedTime": 14,
+    "actualTime": 4,
+    "subtasks": [
+      { "id": 1, "title": "Configure GitHub Actions", "completed": true },
+      { "id": 2, "title": "Set up testing environment", "completed": false },
+      { "id": 3, "title": "Deploy to staging", "completed": false }
+    ],
+    "createdAt": "2024-01-18",
+    "completedAt": null
+  },
+  {
+    "Id": 7,
+    "title": "Plan quarterly team meeting",
+    "description": "Organize and coordinate the Q1 team meeting including agenda, venue, and logistics",
+    "status": "To Do",
+    "priority": "Medium",
+    "dueDate": "2024-02-20",
+    "projectId": 4,
+    "tags": ["meeting", "planning", "team"],
+    "estimatedTime": 4,
+    "actualTime": 0,
+    "subtasks": [
+      { "id": 1, "title": "Book meeting venue", "completed": false },
+      { "id": 2, "title": "Create agenda", "completed": false },
+      { "id": 3, "title": "Send invitations", "completed": false }
+    ],
+    "createdAt": "2024-01-27",
+    "completedAt": null
+  },
+  {
+    "Id": 8,
+    "title": "Optimize database queries",
+    "description": "Identify and optimize slow database queries to improve application performance",
+    "status": "In Progress",
+    "priority": "High",
+    "dueDate": "2024-01-30",
+    "projectId": 1,
+    "tags": ["database", "performance", "optimization"],
+    "estimatedTime": 10,
+    "actualTime": 5,
+    "subtasks": [
+      { "id": 1, "title": "Analyze query performance", "completed": true },
+      { "id": 2, "title": "Add database indexes", "completed": false },
+      { "id": 3, "title": "Test performance improvements", "completed": false }
+    ],
+    "createdAt": "2024-01-24",
+    "completedAt": null
+  },
+  {
+    "Id": 9,
+    "title": "Create social media campaign",
+    "description": "Develop and execute a comprehensive social media strategy for product launch",
+    "status": "To Do",
+    "priority": "Medium",
+    "dueDate": "2024-02-25",
+    "projectId": 2,
+    "tags": ["marketing", "social media", "campaign"],
+    "estimatedTime": 15,
+    "actualTime": 0,
+    "subtasks": [
+      { "id": 1, "title": "Define campaign goals", "completed": false },
+      { "id": 2, "title": "Create content calendar", "completed": false },
+      { "id": 3, "title": "Design promotional graphics", "completed": false }
+    ],
+    "createdAt": "2024-01-28",
+    "completedAt": null
+  },
+  {
+    "Id": 10,
+    "title": "Review and approve budget proposal",
+    "description": "Analyze the proposed Q2 budget allocations and provide feedback and approval",
+    "status": "To Do",
+    "priority": "Urgent",
+    "dueDate": "2024-01-29",
+    "projectId": 4,
+    "tags": ["budget", "finance", "approval"],
+    "estimatedTime": 3,
+    "actualTime": 0,
+    "subtasks": [
+      { "id": 1, "title": "Review budget breakdown", "completed": false },
+      { "id": 2, "title": "Compare with previous quarter", "completed": false },
+      { "id": 3, "title": "Provide written feedback", "completed": false }
+    ],
+    "createdAt": "2024-01-27",
+    "completedAt": null
+  }
+]

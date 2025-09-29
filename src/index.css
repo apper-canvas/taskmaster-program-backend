@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 16px;
+  }
+  
+  input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 ease-out shadow-lg hover:shadow-xl hover:scale-[1.02];
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 hover:border-slate-400 px-4 py-2 rounded-lg font-medium transition-all duration-200 ease-out shadow-sm hover:shadow-md;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-800 px-4 py-2 rounded-lg font-medium transition-all duration-200 ease-out;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-slate-200;
+  }
+  
+  .status-todo {
+    @apply bg-slate-100 text-slate-700 border-slate-200;
+  }
+  
+  .status-in-progress {
+    @apply bg-blue-100 text-blue-700 border-blue-200;
+  }
+  
+  .status-completed {
+    @apply bg-emerald-100 text-emerald-700 border-emerald-200;
+  }
+  
+  .status-blocked {
+    @apply bg-red-100 text-red-700 border-red-200;
+  }
+  
+  .priority-low {
+    @apply text-slate-500;
+  }
+  
+  .priority-medium {
+    @apply text-amber-500;
+  }
+  
+  .priority-high {
+    @apply text-red-500;
+  }
+  
+  .priority-urgent {
+    @apply text-red-600;
+  }
+}
+
+/* Toast Styling */
+.Toastify__toast-container {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+}
+
+.Toastify__toast {
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  min-height: 48px;
+  padding: 16px;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #fef2f2 0%, #fef2f2 100%);
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+
+.Toastify__progress-bar {
+  height: 3px;
+  border-radius: 3px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Selection Styling */
+::selection {
+  background: rgba(37, 99, 235, 0.2);
+  color: #1e40af;
+}
