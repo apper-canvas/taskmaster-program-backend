@@ -5,9 +5,9 @@ import ApperIcon from "@/components/ApperIcon";
 const Select = forwardRef(({ className, children, ...props }, ref) => {
   return (
     <div className="relative">
-      <select
+<select
         className={cn(
-          "flex h-10 w-full appearance-none rounded-lg border border-slate-300 bg-white px-3 py-2 pr-8 text-sm text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200",
+          "flex h-10 w-full appearance-none rounded-lg border border-slate-300 bg-white px-3 py-2 pr-8 text-sm text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200 relative z-10",
           className
         )}
         ref={ref}
