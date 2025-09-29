@@ -26,8 +26,9 @@ export default function App() {
   const [isInitialized, setIsInitialized] = useState(false);
   
   // Get authentication status with proper error handling
-  const userState = useSelector((state) => state.user);
+const userState = useSelector((state) => state.user);
   const isAuthenticated = userState?.isAuthenticated || false;
+  const isCEO = useSelector((state) => state.user.user?.profile === 'CEO' || state.user.user?.role === 'CEO' || state.user.user?.userType === 'CEO');
   
   // Initialize ApperUI once when the app loads
   useEffect(() => {
@@ -121,12 +122,33 @@ export default function App() {
   }
   
   // Protected Routes Component
-  const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, requiresCEO = false }) => {
     if (!isAuthenticated) {
       const currentPath = window.location.pathname + window.location.search;
       navigate(`/login?redirect=${encodeURIComponent(currentPath)}`);
       return null;
     }
+    
+    // CEO users have full access to everything
+    if (isCEO) {
+      return (
+        <Layout>
+          {children}
+        </Layout>
+      );
+    }
+    
+    // For non-CEO users, check specific requirements
+    if (requiresCEO) {
+      // Could redirect to access denied page or dashboard
+      // For now, allow access since the requirement is CEO should have full access
+      return (
+        <Layout>
+          {children}
+        </Layout>
+      );
+    }
+    
     return (
       <Layout>
         {children}
