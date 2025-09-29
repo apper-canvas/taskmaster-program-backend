@@ -73,18 +73,17 @@ setFormData({
     if (!formData.title.trim()) return;
 
     setLoading(true);
-    try {
-
-      await onSave(taskData);
-      onClose();
-    } catch (error) {
-      console.error("Failed to save task:", error);
-const taskData = {
+try {
+      const taskData = {
         ...formData,
         projectId: formData.projectId ? parseInt(formData.projectId) : null,
         assignee: formData.assignee || null,
         estimatedTime: formData.estimatedTime ? parseFloat(formData.estimatedTime) : 0
       };
+      await onSave(taskData);
+      onClose();
+    } catch (error) {
+      console.error("Failed to save task:", error);
     } finally {
       setLoading(false);
     }
