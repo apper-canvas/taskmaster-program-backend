@@ -1,34 +1,34 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Route, Router, Routes, useNavigate } from "react-router-dom";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { clearUser, setUser } from "./store/userSlice";
-import Login from "@/components/pages/Login";
-import Signup from "@/components/pages/Signup";
+import store from "./store/store";
 import Callback from "@/components/pages/Callback";
-import ErrorPage from "@/components/pages/ErrorPage";
-import ResetPassword from "@/components/pages/ResetPassword";
-import PromptPassword from "@/components/pages/PromptPassword";
 import Projects from "@/components/pages/Projects";
+import Signup from "@/components/pages/Signup";
 import Dashboard from "@/components/pages/Dashboard";
 import Settings from "@/components/pages/Settings";
 import Calendar from "@/components/pages/Calendar";
+import ErrorPage from "@/components/pages/ErrorPage";
+import ResetPassword from "@/components/pages/ResetPassword";
+import PromptPassword from "@/components/pages/PromptPassword";
 import Analytics from "@/components/pages/Analytics";
+import Login from "@/components/pages/Login";
 import Tasks from "@/components/pages/Tasks";
 import Layout from "@/components/organisms/Layout";
+import { clearUser, setUser } from "@/store/userSlice";
 
 // Create auth context
 export const AuthContext = createContext(null);
 
-export default function App() {
+function AppContent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isInitialized, setIsInitialized] = useState(false);
   
   // Get authentication status with proper error handling
-const userState = useSelector((state) => state.user);
+  const userState = useSelector((state) => state.user);
   const isAuthenticated = userState?.isAuthenticated || false;
-  const isCEO = useSelector((state) => state.user.user?.profile === 'CEO' || state.user.user?.role === 'CEO' || state.user.user?.userType === 'CEO');
   
   // Initialize ApperUI once when the app loads
   useEffect(() => {
@@ -121,44 +121,9 @@ const userState = useSelector((state) => state.user);
     return <div className="loading flex items-center justify-center p-6 h-full w-full"><svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M12 2v4"></path><path d="m16.2 7.8 2.9-2.9"></path><path d="M18 12h4"></path><path d="m16.2 16.2 2.9 2.9"></path><path d="M12 18v4"></path><path d="m4.9 19.1 2.9-2.9"></path><path d="M2 12h4"></path><path d="m4.9 4.9 2.9 2.9"></path></svg></div>;
   }
   
-  // Protected Routes Component
-const ProtectedRoute = ({ children, requiresCEO = false }) => {
-    if (!isAuthenticated) {
-      const currentPath = window.location.pathname + window.location.search;
-      navigate(`/login?redirect=${encodeURIComponent(currentPath)}`);
-      return null;
-    }
-    
-    // CEO users have full access to everything
-    if (isCEO) {
-      return (
-        <Layout>
-          {children}
-        </Layout>
-      );
-    }
-    
-    // For non-CEO users, check specific requirements
-    if (requiresCEO) {
-      // Could redirect to access denied page or dashboard
-      // For now, allow access since the requirement is CEO should have full access
-      return (
-        <Layout>
-          {children}
-        </Layout>
-      );
-    }
-    
-    return (
-      <Layout>
-        {children}
-      </Layout>
-    );
-  };
-  
   return (
     <AuthContext.Provider value={authMethods}>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
+      <div className="min-h-screen bg-slate-50">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -166,12 +131,12 @@ const ProtectedRoute = ({ children, requiresCEO = false }) => {
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/prompt-password/:appId/:emailAddress/:provider" element={<PromptPassword />} />
           <Route path="/reset-password/:appId/:fields" element={<ResetPassword />} />
-          <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
-          <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
-          <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
-          <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
-          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/tasks" element={<Layout><Tasks /></Layout>} />
+          <Route path="/projects" element={<Layout><Projects /></Layout>} />
+          <Route path="/calendar" element={<Layout><Calendar /></Layout>} />
+          <Route path="/analytics" element={<Layout><Analytics /></Layout>} />
+          <Route path="/settings" element={<Layout><Settings /></Layout>} />
         </Routes>
         <ToastContainer
           position="top-right"
@@ -183,9 +148,22 @@ const ProtectedRoute = ({ children, requiresCEO = false }) => {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          className="z-[9999]"
+          theme="light"
         />
-</div>
+      </div>
     </AuthContext.Provider>
   );
 }
+
+function App() {
+  return (
+    <Provider store={store}>
+      <Router>
+        <AppContent />
+      </Router>
+    </Provider>
+  );
+}
+
+export default App;
+export default App;
