@@ -305,5 +305,3 @@ class TimeService {
 }
 
 export default new TimeService();
-
-export default new TimeService();
