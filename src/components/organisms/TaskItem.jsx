@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import StatusBadge from "@/components/molecules/StatusBadge";
-import PriorityBadge from "@/components/molecules/PriorityBadge";
+import { format } from "date-fns";
+import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
-import ApperIcon from "@/components/ApperIcon";
-import { format } from "date-fns";
+import PriorityBadge from "@/components/molecules/PriorityBadge";
+import StatusBadge from "@/components/molecules/StatusBadge";
 
 export default function TaskItem({ 
   task, 
@@ -103,11 +103,17 @@ export default function TaskItem({
                   </span>
                 )}
 
-                {totalSubtasks > 0 && (
+{totalSubtasks > 0 && (
                   <span className="text-slate-500">
                     <ApperIcon name="CheckSquare" className="h-3 w-3 inline mr-1" />
-                    {completedSubtasks}/{totalSubtasks}
+                    {completedSubtasks}/{totalSubtasks} subtasks
                   </span>
+                )}
+                {task.assignee && (
+                  <div className="flex items-center gap-1 text-sm text-slate-600">
+                    <ApperIcon name="User" className="h-4 w-4" />
+                    <span>{task.assignee}</span>
+                  </div>
                 )}
               </div>
 

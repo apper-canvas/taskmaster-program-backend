@@ -30,18 +30,16 @@ class TaskService {
       .map(task => ({ ...task }));
   }
 
-  async create(taskData) {
+async create(taskData) {
     await this.delay();
     const maxId = Math.max(...this.tasks.map(task => task.Id), 0);
     const newTask = {
       Id: maxId + 1,
-      title: taskData.title || "",
-      description: taskData.description || "",
-      status: taskData.status || "To Do",
-      priority: taskData.priority || "Medium",
-      dueDate: taskData.dueDate || null,
       projectId: taskData.projectId || null,
       tags: taskData.tags || [],
+      status: taskData.status || "To Do",
+      priority: taskData.priority || "Medium",
+      assignee: taskData.assignee || null,
       estimatedTime: taskData.estimatedTime || 0,
       actualTime: 0,
       subtasks: taskData.subtasks || [],
@@ -52,21 +50,23 @@ class TaskService {
     return { ...newTask };
   }
 
-  async update(id, updateData) {
+async update(id, updateData) {
     await this.delay();
     const index = this.tasks.findIndex(task => task.Id === parseInt(id));
     if (index === -1) {
       throw new Error(`Task with id ${id} not found`);
     }
     
+    const existingTask = this.tasks[index];
     const updatedTask = {
-      ...this.tasks[index],
+      ...existingTask,
       ...updateData,
-      completedAt: updateData.status === "Completed" && this.tasks[index].status !== "Completed" 
+      assignee: updateData.assignee !== undefined ? updateData.assignee : existingTask.assignee,
+      completedAt: updateData.status === "Completed" && existingTask.status !== "Completed" 
         ? new Date().toISOString().split("T")[0] 
         : updateData.status !== "Completed" 
         ? null 
-        : this.tasks[index].completedAt
+        : existingTask.completedAt
     };
     
     this.tasks[index] = updatedTask;

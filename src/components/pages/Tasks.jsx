@@ -1,30 +1,33 @@
-import React, { useState, useEffect } from "react";
-import TaskList from "@/components/organisms/TaskList";
-import TaskModal from "@/components/organisms/TaskModal";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Button from "@/components/atoms/Button";
+import TaskModal from "@/components/organisms/TaskModal";
+import TaskList from "@/components/organisms/TaskList";
 import taskService from "@/services/api/taskService";
 import projectService from "@/services/api/projectService";
-import { toast } from "react-toastify";
 
 export default function Tasks() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
   const [projects, setProjects] = useState([]);
+  const [selectedTask, setSelectedTask] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
-
-  const loadProjects = async () => {
-    try {
-      const projectData = await projectService.getAll();
-      setProjects(projectData);
-    } catch (err) {
-      console.error("Failed to load projects:", err);
-    }
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const projectData = await projectService.getAll();
+        setProjects(projectData);
+      } catch (err) {
+        console.error("Failed to load projects:", err);
+        toast.error("Failed to load projects");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
     loadProjects();
   }, []);
-
   const handleCreateTask = () => {
     setSelectedTask(null);
     setIsModalOpen(true);
@@ -89,11 +92,10 @@ export default function Tasks() {
       {/* Task Modal */}
       <TaskModal
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        task={selectedTask}
-        projects={projects}
+onClose={handleCloseModal}
         onSave={handleSaveTask}
-      />
+        projects={projects}
+/>
     </div>
   );
 }

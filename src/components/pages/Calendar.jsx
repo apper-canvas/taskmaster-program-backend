@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
-import CalendarGrid from "@/components/organisms/CalendarGrid";
-import TaskModal from "@/components/organisms/TaskModal";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/atoms/Card";
+import React, { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/Card";
+import { endOfWeek, format, isToday, startOfWeek } from "date-fns";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import Tasks from "@/components/pages/Tasks";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
-import StatusBadge from "@/components/molecules/StatusBadge";
+import CalendarGrid from "@/components/organisms/CalendarGrid";
+import TaskModal from "@/components/organisms/TaskModal";
 import PriorityBadge from "@/components/molecules/PriorityBadge";
 import TimeTracker from "@/components/molecules/TimeTracker";
-import ApperIcon from "@/components/ApperIcon";
+import StatusBadge from "@/components/molecules/StatusBadge";
+import timeService from "@/services/api/timeService";
 import taskService from "@/services/api/taskService";
 import projectService from "@/services/api/projectService";
-import timeService from "@/services/api/timeService";
-import { format, isToday, startOfWeek, endOfWeek } from "date-fns";
-import { toast } from "react-toastify";
 
 export default function Calendar() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -22,8 +23,7 @@ export default function Calendar() {
   const [tasks, setTasks] = useState([]);
   const [selectedDateTasks, setSelectedDateTasks] = useState([]);
   const [refreshKey, setRefreshKey] = useState(0);
-
-  const loadData = async () => {
+const loadData = async () => {
     try {
       const [taskData, projectData] = await Promise.all([
         taskService.getAll(),
@@ -116,8 +116,7 @@ export default function Calendar() {
       toast.error("Failed to track time");
     }
   };
-
-  const getProjectName = (projectId) => {
+const getProjectName = (projectId) => {
     const project = projects.find(p => p.Id === projectId);
     return project ? project.name : "No Project";
   };
@@ -235,7 +234,7 @@ export default function Calendar() {
                               onClick={() => handleTaskStatusUpdate(task.Id, "Completed")}
                               className="text-emerald-600 hover:text-emerald-700"
                             />
-                          )}
+)}
                         </div>
                       </div>
                       
@@ -243,6 +242,13 @@ export default function Calendar() {
                         <div className="text-sm text-slate-600 mb-3 flex items-center gap-1">
                           <ApperIcon name="FolderOpen" className="h-4 w-4" />
                           {getProjectName(task.projectId)}
+                        </div>
+                      )}
+                      
+                      {task.assignee && (
+                        <div className="text-sm text-slate-600 mb-3 flex items-center gap-1">
+                          <ApperIcon name="User" className="h-4 w-4" />
+                          Assigned to {task.assignee}
                         </div>
                       )}
 

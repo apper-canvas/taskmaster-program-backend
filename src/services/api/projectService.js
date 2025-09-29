@@ -25,14 +25,15 @@ class ProjectService {
 
   async create(projectData) {
     await this.delay();
-    const maxId = Math.max(...this.projects.map(project => project.Id), 0);
+const maxId = Math.max(...this.projects.map(project => project.Id), 0);
     const newProject = {
       Id: maxId + 1,
-      name: projectData.name || "",
       description: projectData.description || "",
-      color: projectData.color || "#3b82f6",
       dueDate: projectData.dueDate || null,
-      createdAt: new Date().toISOString().split("T")[0],
+      color: projectData.color || "#3b82f6",
+      assignee: projectData.assignee || null,
+      status: projectData.status || "Active",
+      createdAt: new Date().toISOString().split('T')[0],
       tasks: []
     };
     this.projects.push(newProject);
@@ -45,10 +46,11 @@ class ProjectService {
     if (index === -1) {
       throw new Error(`Project with id ${id} not found`);
     }
-    
+// Update project
     const updatedProject = {
       ...this.projects[index],
-      ...updateData
+      ...updateData,
+      assignee: updateData.assignee !== undefined ? updateData.assignee : this.projects[index].assignee
     };
     
     this.projects[index] = updatedProject;

@@ -8,18 +8,32 @@ import { cn } from "@/utils/cn";
 
 export default function TaskModal({ 
   isOpen, 
-  onClose, 
+onClose, 
   task = null,
   projects = [],
   onSave 
 }) {
-  const [formData, setFormData] = useState({
+  // Sample assignees - in a real app, this would come from a user service
+  const assignees = [
+    "Sarah Johnson",
+    "Mike Chen", 
+    "Emily Rodriguez",
+    "David Kim",
+    "Lisa Wang",
+    "Alex Thompson",
+    "Jessica Brown",
+    "Ryan Martinez",
+    "Amanda Davis",
+    "Robert Wilson"
+  ];
+const [formData, setFormData] = useState({
     title: "",
     description: "",
     status: "To Do",
     priority: "Medium",
     dueDate: "",
     projectId: "",
+    assignee: "",
     estimatedTime: "",
     tags: []
   });
@@ -28,24 +42,26 @@ export default function TaskModal({
 
   useEffect(() => {
     if (task) {
-      setFormData({
+setFormData({
         title: task.title || "",
         description: task.description || "",
         status: task.status || "To Do",
         priority: task.priority || "Medium",
         dueDate: task.dueDate || "",
         projectId: task.projectId?.toString() || "",
+        assignee: task.assignee || "",
         estimatedTime: task.estimatedTime?.toString() || "",
         tags: task.tags || []
       });
     } else {
-      setFormData({
+setFormData({
         title: "",
         description: "",
         status: "To Do",
         priority: "Medium",
         dueDate: "",
         projectId: "",
+        assignee: "",
         estimatedTime: "",
         tags: []
       });
@@ -58,16 +74,17 @@ export default function TaskModal({
 
     setLoading(true);
     try {
-      const taskData = {
-        ...formData,
-        projectId: formData.projectId ? parseInt(formData.projectId) : null,
-        estimatedTime: formData.estimatedTime ? parseFloat(formData.estimatedTime) : 0
-      };
 
       await onSave(taskData);
       onClose();
     } catch (error) {
       console.error("Failed to save task:", error);
+const taskData = {
+        ...formData,
+        projectId: formData.projectId ? parseInt(formData.projectId) : null,
+        assignee: formData.assignee || null,
+        estimatedTime: formData.estimatedTime ? parseFloat(formData.estimatedTime) : 0
+      };
     } finally {
       setLoading(false);
     }
@@ -164,8 +181,7 @@ export default function TaskModal({
               step="0.5"
             />
           </div>
-
-          <FormField
+<FormField
             label="Project"
             type="select"
             value={formData.projectId}
@@ -179,6 +195,19 @@ export default function TaskModal({
             ))}
           </FormField>
 
+          <FormField
+            label="Assignee"
+            type="select"
+            value={formData.assignee}
+            onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
+          >
+            <option value="">Unassigned</option>
+            {assignees.map(assignee => (
+              <option key={assignee} value={assignee}>
+                {assignee}
+              </option>
+            ))}
+          </FormField>
           {/* Tags Section */}
           <div className="space-y-3">
             <label className="text-sm font-medium text-slate-700">Tags</label>

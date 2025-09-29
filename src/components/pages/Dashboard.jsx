@@ -206,7 +206,7 @@ export default function Dashboard() {
             </div>
           </CardHeader>
           <CardContent>
-            {todayTasks.length === 0 ? (
+{todayTasks.length === 0 ? (
               <div className="text-center py-8">
                 <ApperIcon name="CheckCircle2" className="h-12 w-12 text-slate-300 mx-auto mb-3" />
                 <p className="text-slate-500">No tasks due today</p>
@@ -218,6 +218,18 @@ export default function Dashboard() {
                   <div key={task.Id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
                     <div className="flex-1">
                       <h4 className="font-medium text-slate-900">{task.title}</h4>
+                      <div className="flex items-center gap-2 text-sm text-slate-500">
+                        <StatusBadge status={task.status} />
+                        {task.assignee && (
+                          <>
+                            <span>•</span>
+                            <div className="flex items-center gap-1">
+                              <ApperIcon name="User" className="h-3 w-3" />
+                              <span>{task.assignee}</span>
+                            </div>
+                          </>
+                        )}
+                      </div>
                       <div className="flex items-center gap-2 mt-1">
                         <StatusBadge status={task.status} />
                         <PriorityBadge priority={task.priority} />
@@ -260,7 +272,7 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className="space-y-3">
-                {recentTasks.map(task => (
+{recentTasks.map(task => (
                   <div key={task.Id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
                       <ApperIcon 
@@ -274,6 +286,15 @@ export default function Dashboard() {
                         <StatusBadge status={task.status} />
                         <span>•</span>
                         <span>{formatRelativeDate(task.completedAt || task.createdAt)}</span>
+                        {task.assignee && (
+                          <>
+                            <span>•</span>
+                            <div className="flex items-center gap-1">
+                              <ApperIcon name="User" className="h-3 w-3" />
+                              <span>{task.assignee}</span>
+                            </div>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
