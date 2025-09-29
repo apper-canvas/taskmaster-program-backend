@@ -209,7 +209,7 @@ const getProjectName = (projectId) => {
               ) : (
                 <div className="space-y-4">
                   {selectedDateTasks.map(task => (
-                    <div key={task.Id} className="border border-slate-200 rounded-lg p-4 hover:shadow-md transition-all duration-200">
+<div key={task.Id} className="border border-slate-200 rounded-lg p-4 hover:shadow-md transition-all duration-200">
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <h4 className="font-semibold text-slate-900 mb-1">{task.title}</h4>

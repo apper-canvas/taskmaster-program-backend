@@ -123,7 +123,7 @@ export default function TaskList({
     );
   };
 
-  // Filter tasks
+// Filter tasks
   const filteredTasks = tasks.filter(task => {
     const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          task.description.toLowerCase().includes(searchQuery.toLowerCase());

@@ -39,12 +39,12 @@ export default function ProjectCard({
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg font-bold text-slate-900 mb-2">
-              {project.name}
+{project.name}
             </CardTitle>
             <p className="text-sm text-slate-600 line-clamp-2">
 {project.description}
             </p>
-            {project.assignee && (
+{project.assignee && (
               <div className="flex items-center gap-2 mt-3 pt-3 border-t border-slate-100">
                 <ApperIcon name="User" className="h-4 w-4 text-slate-500" />
                 <span className="text-sm text-slate-600">{project.assignee}</span>
@@ -122,7 +122,7 @@ export default function ProjectCard({
         </div>
 
         {/* Due Date */}
-        {project.dueDate && (
+{project.dueDate && (
           <div className="flex items-center gap-2">
             <ApperIcon name="Calendar" className="h-4 w-4 text-slate-500" />
             <span className={`text-sm ${

@@ -78,7 +78,7 @@ const handleEditProject = (project) => {
     setIsModalOpen(true);
   };
 
-  const handleViewProject = (project) => {
+const handleViewProject = (project) => {
     navigate(`/tasks?project=${project.Id}`);
   };
 

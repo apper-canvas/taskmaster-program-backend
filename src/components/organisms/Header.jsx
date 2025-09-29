@@ -1,37 +1,66 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useSelector } from 'react-redux';
 import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
+import { AuthContext } from '../../App';
 
-export default function Header({ onMenuClick }) {
+export default function Header({ onMobileMenuToggle }) {
+  const { user } = useSelector((state) => state.user);
+  const { logout } = useContext(AuthContext);
+  
+  const handleLogout = async () => {
+    if (window.confirm('Are you sure you want to logout?')) {
+      await logout();
+    }
+  };
+
   return (
-    <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 lg:px-6 shadow-sm">
+    <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 lg:px-8">
       <div className="flex items-center gap-4">
         <Button
           variant="ghost"
           size="sm"
           icon="Menu"
-          onClick={onMenuClick}
+          onClick={onMobileMenuToggle}
           className="lg:hidden"
         />
-        
-        <div className="lg:hidden flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center shadow-lg">
-            <ApperIcon name="CheckSquare" className="h-5 w-5 text-white" />
-          </div>
-          <h1 className="text-lg font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-            TaskMaster Pro
-          </h1>
-        </div>
+        <h1 className="hidden sm:block text-xl font-bold text-slate-900">
+          TaskMaster Pro
+        </h1>
       </div>
-
-      <div className="flex items-center gap-3">
-        <Button variant="ghost" size="sm" icon="Bell">
-          <span className="hidden sm:inline">Notifications</span>
-        </Button>
+      
+      <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="sm"
+          icon="Bell"
+          className="hidden sm:flex"
+        />
         
-        <div className="w-8 h-8 bg-gradient-to-br from-slate-400 to-slate-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
-          U
-        </div>
+        {user && (
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:block text-right">
+              <div className="text-sm font-medium text-slate-900">
+                {user.firstName} {user.lastName}
+              </div>
+              <div className="text-xs text-slate-500">
+                {user.emailAddress}
+              </div>
+            </div>
+            <div className="w-8 h-8 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center font-semibold text-sm">
+              {user.firstName?.[0]}{user.lastName?.[0]}
+            </div>
+          </div>
+        )}
+        
+        <Button
+          variant="ghost"
+          size="sm"
+          icon="LogOut"
+          onClick={handleLogout}
+          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+          title="Logout"
+        />
       </div>
     </header>
   );

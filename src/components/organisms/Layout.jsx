@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Sidebar from "@/components/organisms/Sidebar";
 import MobileSidebar from "@/components/organisms/MobileSidebar";
 import Header from "@/components/organisms/Header";
-
 export default function Layout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 

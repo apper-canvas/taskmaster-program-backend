@@ -63,7 +63,7 @@ export default function Dashboard() {
   }
 
   // Calculate metrics
-  const totalTasks = tasks.length;
+const totalTasks = tasks.length;
   const completedTasks = tasks.filter(task => task.status === "Completed").length;
   const inProgressTasks = tasks.filter(task => task.status === "In Progress").length;
   const overdueTasks = tasks.filter(task => 
@@ -215,7 +215,7 @@ export default function Dashboard() {
             ) : (
               <div className="space-y-3">
                 {todayTasks.slice(0, 4).map(task => (
-                  <div key={task.Id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+<div key={task.Id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
                     <div className="flex-1">
                       <h4 className="font-medium text-slate-900">{task.title}</h4>
                       <div className="flex items-center gap-2 text-sm text-slate-500">
