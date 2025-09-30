@@ -8,9 +8,10 @@ import { cn } from "@/utils/cn";
 
 export default function TaskModal({ 
   isOpen, 
-onClose, 
+  onClose, 
   task = null,
   projects = [],
+  users = [],
   onSave 
 }) {
 // Sample assignees - in a real app, this would come from a user service
@@ -182,14 +183,18 @@ const taskData = {
             ))}
           </FormField>
 
-          <FormField
+<FormField
             label="Assignee"
             type="select"
             value={formData.assignee}
             onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
           >
-<option value="">No Assignee</option>
-            {/* Assignee options will be populated by database lookup */}
+            <option value="">No Assignee</option>
+            {users.map(user => (
+              <option key={user.Id} value={user.Id}>
+                {user.name} ({user.role})
+              </option>
+            ))}
           </FormField>
 
           {/* Tags Section */}

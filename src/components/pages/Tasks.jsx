@@ -5,28 +5,32 @@ import TaskModal from "@/components/organisms/TaskModal";
 import TaskList from "@/components/organisms/TaskList";
 import taskService from "@/services/api/taskService";
 import projectService from "@/services/api/projectService";
-
+import userService from "@/services/api/userService";
 export default function Tasks() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const [isModalOpen, setIsModalOpen] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadProjects = async () => {
+useEffect(() => {
+    const loadData = async () => {
       try {
-        const projectData = await projectService.getAll();
+        const [projectData, userData] = await Promise.all([
+          projectService.getAll(),
+          userService.getAll()
+        ]);
         setProjects(projectData);
+        setUsers(userData);
       } catch (err) {
-        console.error("Failed to load projects:", err);
-        toast.error("Failed to load projects");
+        console.error("Failed to load data:", err);
+        toast.error("Failed to load project and user data");
       } finally {
         setLoading(false);
       }
     };
     
-    loadProjects();
+    loadData();
   }, []);
   const handleCreateTask = () => {
     setSelectedTask(null);
@@ -90,12 +94,13 @@ export default function Tasks() {
       />
 
       {/* Task Modal */}
-      <TaskModal
+<TaskModal
         isOpen={isModalOpen}
-onClose={handleCloseModal}
+        onClose={handleCloseModal}
         onSave={handleSaveTask}
         projects={projects}
-/>
+        users={users}
+      />
     </div>
   );
 }
