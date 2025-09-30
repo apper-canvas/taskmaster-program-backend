@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import ProjectCard from "@/components/organisms/ProjectCard";
-import Button from "@/components/atoms/Button";
-import FormField from "@/components/molecules/FormField";
-import SearchBar from "@/components/molecules/SearchBar";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
-import projectService from "@/services/api/projectService";
-import taskService from "@/services/api/taskService";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import ProjectCard from "@/components/organisms/ProjectCard";
+import SearchBar from "@/components/molecules/SearchBar";
+import FormField from "@/components/molecules/FormField";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import Loading from "@/components/ui/Loading";
+import taskService from "@/services/api/taskService";
+import projectService from "@/services/api/projectService";
 
 export default function Projects() {
   const navigate = useNavigate();
@@ -28,7 +28,6 @@ const [formData, setFormData] = useState({
     description: "",
     color: "#3b82f6",
     dueDate: "",
-    assignee: ""
   });
 
   const loadData = async () => {
@@ -61,7 +60,6 @@ const handleCreateProject = () => {
       description: "",
       color: "#3b82f6",
       dueDate: "",
-      assignee: ""
     });
     setIsModalOpen(true);
   };
@@ -73,7 +71,6 @@ const handleEditProject = (project) => {
       description: project.description,
       color: project.color,
       dueDate: project.dueDate || "",
-      assignee: project.assignee || ""
     });
     setIsModalOpen(true);
   };
@@ -240,13 +237,6 @@ const handleViewProject = (project) => {
                 onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
               />
 
-              <FormField
-                label="Assignee"
-                type="text"
-                placeholder="Enter team member name"
-                value={formData.assignee}
-                onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
-              />
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700">
                   Project Color

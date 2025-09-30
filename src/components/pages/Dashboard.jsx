@@ -220,15 +220,6 @@ const totalTasks = tasks.length;
                       <h4 className="font-medium text-slate-900">{task.title}</h4>
                       <div className="flex items-center gap-2 text-sm text-slate-500">
                         <StatusBadge status={task.status} />
-                        {task.assignee && (
-                          <>
-                            <span>•</span>
-                            <div className="flex items-center gap-1">
-                              <ApperIcon name="User" className="h-3 w-3" />
-                              <span>{task.assignee}</span>
-                            </div>
-                          </>
-                        )}
                       </div>
                       <div className="flex items-center gap-2 mt-1">
                         <StatusBadge status={task.status} />
@@ -286,15 +277,6 @@ const totalTasks = tasks.length;
                         <StatusBadge status={task.status} />
                         <span>•</span>
                         <span>{formatRelativeDate(task.completedAt || task.createdAt)}</span>
-                        {task.assignee && (
-                          <>
-                            <span>•</span>
-                            <div className="flex items-center gap-1">
-                              <ApperIcon name="User" className="h-3 w-3" />
-                              <span>{task.assignee}</span>
-                            </div>
-                          </>
-                        )}
                       </div>
                     </div>
                   </div>

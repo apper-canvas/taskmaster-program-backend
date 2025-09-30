@@ -109,11 +109,6 @@ export default function TaskItem({
                     {completedSubtasks}/{totalSubtasks} subtasks
                   </span>
                 )}
-                {task.assignee && (
-                  <div className="flex items-center gap-1 text-sm text-slate-600">
-                    <ApperIcon name="User" className="h-4 w-4" />
-                    <span>{task.assignee}</span>
-                  </div>
                 )}
               </div>
 

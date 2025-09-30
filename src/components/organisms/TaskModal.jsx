@@ -14,18 +14,6 @@ onClose,
   onSave 
 }) {
   // Sample assignees - in a real app, this would come from a user service
-  const assignees = [
-    "Sarah Johnson",
-    "Mike Chen", 
-    "Emily Rodriguez",
-    "David Kim",
-    "Lisa Wang",
-    "Alex Thompson",
-    "Jessica Brown",
-    "Ryan Martinez",
-    "Amanda Davis",
-    "Robert Wilson"
-  ];
 const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -33,7 +21,6 @@ const [formData, setFormData] = useState({
     priority: "Medium",
     dueDate: "",
     projectId: "",
-    assignee: "",
     estimatedTime: "",
     tags: []
   });
@@ -49,7 +36,6 @@ setFormData({
         priority: task.priority || "Medium",
         dueDate: task.dueDate || "",
         projectId: task.projectId?.toString() || "",
-        assignee: task.assignee || "",
         estimatedTime: task.estimatedTime?.toString() || "",
         tags: task.tags || []
       });
@@ -61,7 +47,6 @@ setFormData({
         priority: "Medium",
         dueDate: "",
         projectId: "",
-        assignee: "",
         estimatedTime: "",
         tags: []
       });
@@ -77,7 +62,6 @@ try {
       const taskData = {
         ...formData,
         projectId: formData.projectId ? parseInt(formData.projectId) : null,
-        assignee: formData.assignee || null,
         estimatedTime: formData.estimatedTime ? parseFloat(formData.estimatedTime) : 0
       };
       await onSave(taskData);
@@ -194,19 +178,6 @@ try {
             ))}
           </FormField>
 
-          <FormField
-            label="Assignee"
-            type="select"
-            value={formData.assignee}
-            onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
-          >
-            <option value="">Unassigned</option>
-            {assignees.map(assignee => (
-              <option key={assignee} value={assignee}>
-                {assignee}
-              </option>
-            ))}
-          </FormField>
           {/* Tags Section */}
           <div className="space-y-3">
             <label className="text-sm font-medium text-slate-700">Tags</label>

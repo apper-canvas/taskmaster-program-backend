@@ -245,12 +245,6 @@ const getProjectName = (projectId) => {
                         </div>
                       )}
                       
-                      {task.assignee && (
-                        <div className="text-sm text-slate-600 mb-3 flex items-center gap-1">
-                          <ApperIcon name="User" className="h-4 w-4" />
-                          Assigned to {task.assignee}
-                        </div>
-                      )}
 
                       {/* Time Tracking */}
                       {task.status === "In Progress" && (
