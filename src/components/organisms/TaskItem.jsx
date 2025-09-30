@@ -109,7 +109,6 @@ export default function TaskItem({
                     {completedSubtasks}/{totalSubtasks} subtasks
                   </span>
                 )}
-                )}
               </div>
 
               {task.tags && task.tags.length > 0 && (
