@@ -23,11 +23,20 @@ export default function TaskList({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
+const [statusFilter, setStatusFilter] = useState("all");
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [projectFilter, setProjectFilter] = useState("all");
+  const [assigneeFilter, setAssigneeFilter] = useState("all");
   const [selectedTasks, setSelectedTasks] = useState([]);
 
+  // Sample assignees - in a real app, this would come from a user service
+  const sampleAssignees = [
+    { Id: 1, Name: "John Smith" },
+    { Id: 2, Name: "Sarah Johnson" },
+    { Id: 3, Name: "Mike Chen" },
+    { Id: 4, Name: "Emily Davis" },
+    { Id: 5, Name: "Alex Rodriguez" }
+  ];
   const loadTasks = async () => {
     try {
       setError("");
@@ -124,14 +133,15 @@ export default function TaskList({
   };
 
 // Filter tasks
-  const filteredTasks = tasks.filter(task => {
+const filteredTasks = tasks.filter(task => {
     const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          task.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === "all" || task.status === statusFilter;
     const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter;
     const matchesProject = projectFilter === "all" || task.projectId === parseInt(projectFilter);
+    const matchesAssignee = assigneeFilter === "all" || task.assignee === parseInt(assigneeFilter);
     
-    return matchesSearch && matchesStatus && matchesPriority && matchesProject;
+    return matchesSearch && matchesStatus && matchesPriority && matchesProject && matchesAssignee;
   });
 
   const getProjectName = (projectId) => {
@@ -174,7 +184,7 @@ export default function TaskList({
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Select
+<Select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="min-w-32"
@@ -196,6 +206,19 @@ export default function TaskList({
               <option value="Medium">Medium</option>
               <option value="High">High</option>
               <option value="Urgent">Urgent</option>
+            </Select>
+
+            <Select
+              value={assigneeFilter}
+              onChange={(e) => setAssigneeFilter(e.target.value)}
+              className="min-w-36"
+            >
+              <option value="all">All Assignees</option>
+              {sampleAssignees.map(assignee => (
+                <option key={assignee.Id} value={assignee.Id}>
+                  {assignee.Name}
+                </option>
+              ))}
             </Select>
 
             {!projectId && (

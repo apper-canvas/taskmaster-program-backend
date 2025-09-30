@@ -23,11 +23,21 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [modalLoading, setModalLoading] = useState(false);
 
-const [formData, setFormData] = useState({
+// Sample assignees - in a real app, this would come from a user service
+  const sampleAssignees = [
+    { Id: 1, Name: "John Smith" },
+    { Id: 2, Name: "Sarah Johnson" },
+    { Id: 3, Name: "Mike Chen" },
+    { Id: 4, Name: "Emily Davis" },
+    { Id: 5, Name: "Alex Rodriguez" }
+  ];
+
+  const [formData, setFormData] = useState({
     name: "",
     description: "",
     color: "#3b82f6",
     dueDate: "",
+    assignee: "",
   });
 
   const loadData = async () => {
@@ -54,12 +64,13 @@ const [formData, setFormData] = useState({
   }, []);
 
 const handleCreateProject = () => {
-    setSelectedProject(null);
+setSelectedProject(null);
     setFormData({
       name: "",
       description: "",
       color: "#3b82f6",
       dueDate: "",
+      assignee: "",
     });
     setIsModalOpen(true);
   };
@@ -71,6 +82,7 @@ const handleEditProject = (project) => {
       description: project.description,
       color: project.color,
       dueDate: project.dueDate || "",
+      assignee: project.assignee?.toString() || "",
     });
     setIsModalOpen(true);
   };
@@ -236,6 +248,20 @@ const handleViewProject = (project) => {
                 value={formData.dueDate}
                 onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
               />
+
+              <FormField
+                label="Assignee"
+                type="select"
+                value={formData.assignee}
+                onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
+              >
+                <option value="">No Assignee</option>
+                {sampleAssignees.map(assignee => (
+                  <option key={assignee.Id} value={assignee.Id}>
+                    {assignee.Name}
+                  </option>
+                ))}
+              </FormField>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700">

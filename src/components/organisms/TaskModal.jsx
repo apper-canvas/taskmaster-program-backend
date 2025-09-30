@@ -13,14 +13,23 @@ onClose,
   projects = [],
   onSave 
 }) {
-  // Sample assignees - in a real app, this would come from a user service
-const [formData, setFormData] = useState({
+// Sample assignees - in a real app, this would come from a user service
+  const sampleAssignees = [
+    { Id: 1, Name: "John Smith" },
+    { Id: 2, Name: "Sarah Johnson" },
+    { Id: 3, Name: "Mike Chen" },
+    { Id: 4, Name: "Emily Davis" },
+    { Id: 5, Name: "Alex Rodriguez" }
+  ];
+
+  const [formData, setFormData] = useState({
     title: "",
     description: "",
     status: "To Do",
     priority: "Medium",
     dueDate: "",
     projectId: "",
+    assignee: "",
     estimatedTime: "",
     tags: []
   });
@@ -28,25 +37,27 @@ const [formData, setFormData] = useState({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (task) {
-setFormData({
+if (task) {
+      setFormData({
         title: task.title || "",
         description: task.description || "",
         status: task.status || "To Do",
         priority: task.priority || "Medium",
         dueDate: task.dueDate || "",
         projectId: task.projectId?.toString() || "",
+        assignee: task.assignee?.toString() || "",
         estimatedTime: task.estimatedTime?.toString() || "",
         tags: task.tags || []
       });
     } else {
-setFormData({
+      setFormData({
         title: "",
         description: "",
         status: "To Do",
         priority: "Medium",
         dueDate: "",
         projectId: "",
+        assignee: "",
         estimatedTime: "",
         tags: []
       });
@@ -59,9 +70,10 @@ setFormData({
 
     setLoading(true);
 try {
-      const taskData = {
+const taskData = {
         ...formData,
         projectId: formData.projectId ? parseInt(formData.projectId) : null,
+        assignee: formData.assignee ? parseInt(formData.assignee) : null,
         estimatedTime: formData.estimatedTime ? parseFloat(formData.estimatedTime) : 0
       };
       await onSave(taskData);
@@ -174,6 +186,20 @@ try {
             {projects.map(project => (
               <option key={project.Id} value={project.Id}>
                 {project.name}
+              </option>
+            ))}
+          </FormField>
+
+          <FormField
+            label="Assignee"
+            type="select"
+            value={formData.assignee}
+            onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
+          >
+            <option value="">No Assignee</option>
+            {sampleAssignees.map(assignee => (
+              <option key={assignee.Id} value={assignee.Id}>
+                {assignee.Name}
               </option>
             ))}
           </FormField>
