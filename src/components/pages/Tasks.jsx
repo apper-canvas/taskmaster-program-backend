@@ -87,10 +87,11 @@ useEffect(() => {
       </div>
 
       {/* Task List */}
-      <TaskList
+<TaskList
         key={refreshKey}
         onTaskSelect={handleEditTask}
         onTaskCreate={handleCreateTask}
+        users={users}
       />
 
       {/* Task Modal */}

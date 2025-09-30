@@ -17,7 +17,8 @@ export default function TaskList({
   showFilters = true, 
   projectId = null,
   onTaskSelect,
-  onTaskCreate
+  onTaskCreate,
+  users = []
 }) {
   const [tasks, setTasks] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -208,7 +209,11 @@ const matchesAssignee = assigneeFilter === "all" || task.assignee?.Id === parseI
               className="min-w-36"
             >
               <option value="all">All Assignees</option>
-              {/* Assignee filter options will be populated by database lookup */}
+              {users.map(user => (
+                <option key={user.Id} value={user.Id}>
+                  {user.name} ({user.role})
+                </option>
+              ))}
             </Select>
 
             {!projectId && (
