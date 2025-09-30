@@ -14,14 +14,6 @@ onClose,
   onSave 
 }) {
 // Sample assignees - in a real app, this would come from a user service
-  const sampleAssignees = [
-    { Id: 1, Name: "John Smith" },
-    { Id: 2, Name: "Sarah Johnson" },
-    { Id: 3, Name: "Mike Chen" },
-    { Id: 4, Name: "Emily Davis" },
-    { Id: 5, Name: "Alex Rodriguez" }
-  ];
-
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -45,7 +37,7 @@ if (task) {
         priority: task.priority || "Medium",
         dueDate: task.dueDate || "",
         projectId: task.projectId?.toString() || "",
-        assignee: task.assignee?.toString() || "",
+assignee: task.assignee?.Id?.toString() || "",
         estimatedTime: task.estimatedTime?.toString() || "",
         tags: task.tags || []
       });
@@ -196,12 +188,8 @@ const taskData = {
             value={formData.assignee}
             onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
           >
-            <option value="">No Assignee</option>
-            {sampleAssignees.map(assignee => (
-              <option key={assignee.Id} value={assignee.Id}>
-                {assignee.Name}
-              </option>
-            ))}
+<option value="">No Assignee</option>
+            {/* Assignee options will be populated by database lookup */}
           </FormField>
 
           {/* Tags Section */}

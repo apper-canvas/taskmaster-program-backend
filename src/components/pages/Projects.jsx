@@ -23,14 +23,6 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [modalLoading, setModalLoading] = useState(false);
 
-// Sample assignees - in a real app, this would come from a user service
-  const sampleAssignees = [
-    { Id: 1, Name: "John Smith" },
-    { Id: 2, Name: "Sarah Johnson" },
-    { Id: 3, Name: "Mike Chen" },
-    { Id: 4, Name: "Emily Davis" },
-    { Id: 5, Name: "Alex Rodriguez" }
-  ];
 
   const [formData, setFormData] = useState({
     name: "",
@@ -82,7 +74,7 @@ const handleEditProject = (project) => {
       description: project.description,
       color: project.color,
       dueDate: project.dueDate || "",
-      assignee: project.assignee?.toString() || "",
+assignee: project.assignee?.Id?.toString() || "",
     });
     setIsModalOpen(true);
   };
@@ -250,17 +242,13 @@ const handleViewProject = (project) => {
               />
 
               <FormField
-                label="Assignee"
+label="Assignee"
                 type="select"
                 value={formData.assignee}
                 onChange={(e) => setFormData({ ...formData, assignee: e.target.value })}
               >
                 <option value="">No Assignee</option>
-                {sampleAssignees.map(assignee => (
-                  <option key={assignee.Id} value={assignee.Id}>
-                    {assignee.Name}
-                  </option>
-                ))}
+                {/* Assignee options will be populated by database lookup */}
               </FormField>
 
               <div className="space-y-2">

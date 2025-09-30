@@ -22,8 +22,8 @@ class ProjectService {
           {"field": {"Name": "name_c"}},
           {"field": {"Name": "description_c"}},
           {"field": {"Name": "color_c"}},
-          {"field": {"Name": "due_date_c"}},
-          {"field": {"Name": "assignee_c"}},
+{"field": {"Name": "due_date_c"}},
+          {"field": {"Name": "assignee_id_c"}},
           {"field": {"Name": "tasks_c"}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "CreatedOn"}},
@@ -46,7 +46,7 @@ class ProjectService {
           description: project.description_c || '',
           color: project.color_c || '#3b82f6',
           dueDate: project.due_date_c || null,
-          assignee: project.assignee_c || null,
+assignee: project.assignee_id_c || null,
           tasks: project.tasks_c ? project.tasks_c.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id)) : [],
           createdAt: project.CreatedOn ? project.CreatedOn.split('T')[0] : null
         }));
@@ -66,8 +66,8 @@ class ProjectService {
           {"field": {"Name": "name_c"}},
           {"field": {"Name": "description_c"}},
           {"field": {"Name": "color_c"}},
-          {"field": {"Name": "due_date_c"}},
-          {"field": {"Name": "assignee_c"}},
+{"field": {"Name": "due_date_c"}},
+          {"field": {"Name": "assignee_id_c"}},
           {"field": {"Name": "tasks_c"}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "CreatedOn"}}
@@ -85,8 +85,8 @@ class ProjectService {
           name: project.name_c || project.Name || 'Untitled Project',
           description: project.description_c || '',
           color: project.color_c || '#3b82f6',
-          dueDate: project.due_date_c || null,
-          assignee: project.assignee_c || null,
+dueDate: project.due_date_c || null,
+          assignee: project.assignee_id_c || null,
           tasks: project.tasks_c ? project.tasks_c.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id)) : [],
           createdAt: project.CreatedOn ? project.CreatedOn.split('T')[0] : null
         };
@@ -106,8 +106,8 @@ class ProjectService {
             name_c: projectData.name || 'Untitled Project',
             description_c: projectData.description || '',
             color_c: projectData.color || '#3b82f6',
-            due_date_c: projectData.dueDate || null,
-            assignee_c: projectData.assignee || null,
+due_date_c: projectData.dueDate || null,
+            assignee_id_c: projectData.assignee || null,
             tasks_c: projectData.tasks && projectData.tasks.length > 0 ? projectData.tasks.join(',') : ''
           }
         ]
@@ -141,7 +141,7 @@ class ProjectService {
             description: createdProject.description_c || '',
             color: createdProject.color_c || '#3b82f6',
             dueDate: createdProject.due_date_c || null,
-            assignee: createdProject.assignee_c || null,
+assignee: createdProject.assignee_id_c || null,
             tasks: createdProject.tasks_c ? createdProject.tasks_c.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id)) : [],
             createdAt: createdProject.CreatedOn ? createdProject.CreatedOn.split('T')[0] : null
           };
@@ -164,7 +164,7 @@ class ProjectService {
             ...(updateData.description !== undefined && { description_c: updateData.description }),
             ...(updateData.color && { color_c: updateData.color }),
             ...(updateData.dueDate !== undefined && { due_date_c: updateData.dueDate }),
-            ...(updateData.assignee !== undefined && { assignee_c: updateData.assignee }),
+...(updateData.assignee !== undefined && { assignee_id_c: updateData.assignee }),
             ...(updateData.tasks !== undefined && { tasks_c: updateData.tasks.length > 0 ? updateData.tasks.join(',') : '' })
           }
         ]
@@ -198,7 +198,7 @@ class ProjectService {
             description: updatedProject.description_c || '',
             color: updatedProject.color_c || '#3b82f6',
             dueDate: updatedProject.due_date_c || null,
-            assignee: updatedProject.assignee_c || null,
+assignee: updatedProject.assignee_id_c || null,
             tasks: updatedProject.tasks_c ? updatedProject.tasks_c.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id)) : [],
             createdAt: updatedProject.CreatedOn ? updatedProject.CreatedOn.split('T')[0] : null
           };

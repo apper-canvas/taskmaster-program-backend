@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
-import taskService from "@/services/api/taskService";
-import projectService from "@/services/api/projectService";
-import TaskItem from "@/components/organisms/TaskItem";
-import SearchBar from "@/components/molecules/SearchBar";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import Projects from "@/components/pages/Projects";
 import Button from "@/components/atoms/Button";
 import Select from "@/components/atoms/Select";
 import Badge from "@/components/atoms/Badge";
-import Loading from "@/components/ui/Loading";
+import TaskItem from "@/components/organisms/TaskItem";
+import SearchBar from "@/components/molecules/SearchBar";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import { toast } from "react-toastify";
-import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
+import taskService from "@/services/api/taskService";
+import projectService from "@/services/api/projectService";
 
 export default function TaskList({ 
   showFilters = true, 
@@ -30,13 +31,6 @@ const [statusFilter, setStatusFilter] = useState("all");
   const [selectedTasks, setSelectedTasks] = useState([]);
 
   // Sample assignees - in a real app, this would come from a user service
-  const sampleAssignees = [
-    { Id: 1, Name: "John Smith" },
-    { Id: 2, Name: "Sarah Johnson" },
-    { Id: 3, Name: "Mike Chen" },
-    { Id: 4, Name: "Emily Davis" },
-    { Id: 5, Name: "Alex Rodriguez" }
-  ];
   const loadTasks = async () => {
     try {
       setError("");
@@ -139,7 +133,7 @@ const filteredTasks = tasks.filter(task => {
     const matchesStatus = statusFilter === "all" || task.status === statusFilter;
     const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter;
     const matchesProject = projectFilter === "all" || task.projectId === parseInt(projectFilter);
-    const matchesAssignee = assigneeFilter === "all" || task.assignee === parseInt(assigneeFilter);
+const matchesAssignee = assigneeFilter === "all" || task.assignee?.Id === parseInt(assigneeFilter);
     
     return matchesSearch && matchesStatus && matchesPriority && matchesProject && matchesAssignee;
   });
@@ -208,17 +202,13 @@ const filteredTasks = tasks.filter(task => {
               <option value="Urgent">Urgent</option>
             </Select>
 
-            <Select
+<Select
               value={assigneeFilter}
               onChange={(e) => setAssigneeFilter(e.target.value)}
               className="min-w-36"
             >
               <option value="all">All Assignees</option>
-              {sampleAssignees.map(assignee => (
-                <option key={assignee.Id} value={assignee.Id}>
-                  {assignee.Name}
-                </option>
-              ))}
+              {/* Assignee filter options will be populated by database lookup */}
             </Select>
 
             {!projectId && (
