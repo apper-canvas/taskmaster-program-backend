@@ -22,7 +22,7 @@ export default function Sidebar({ className }) {
       href: "/projects", 
       icon: "FolderOpen"
     },
-    {
+{
       name: "Calendar",
       href: "/calendar",
       icon: "Calendar"
@@ -31,6 +31,11 @@ export default function Sidebar({ className }) {
       name: "Analytics",
       href: "/analytics",
       icon: "BarChart3"
+    },
+    {
+      name: "Clients",
+      href: "/clients",
+      icon: "Users"
     },
     {
       name: "Settings",
