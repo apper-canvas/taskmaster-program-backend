@@ -80,7 +80,7 @@ assignee: project.assignee?.Id?.toString() || "",
   };
 
 const handleViewProject = (project) => {
-    navigate(`/tasks?project=${project.Id}`);
+    navigate(`/projects/${project.Id}`);
   };
 
   const handleDeleteProject = async (project) => {
