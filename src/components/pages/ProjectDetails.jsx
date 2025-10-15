@@ -38,17 +38,17 @@ export default function ProjectDetails() {
       setError("");
       setLoading(true);
       
-      const [projectData, allTasks] = await Promise.all([
+const [projectData, allTasks] = await Promise.all([
         projectService.getById(parseInt(id)),
-        taskService.getAll()
+        taskService.getByProjectId(parseInt(id)),
       ]);
-      
-      if (!projectData) {
-        setError("Project not found");
-        return;
-      }
-      
-      setProject(projectData);
+
+      const projectTasks = allTasks.filter(
+        (task) => task.projectId === parseInt(id)
+      );
+
+      setTasks(projectTasks);
+      setProject(projectData.data);
       setTasks(allTasks.filter(task => task.projectId === parseInt(id)));
     } catch (err) {
       setError(err.message || "Failed to load project details");
