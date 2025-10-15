@@ -99,6 +99,7 @@ useEffect(() => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onSave={handleSaveTask}
+        task={selectedTask}
         projects={projects}
         users={users}
       />
