@@ -38,7 +38,7 @@ if (task) {
         priority: task.priority || "Medium",
         dueDate: task.dueDate || "",
         projectId: task.projectId?.toString() || "",
-assignee: task.assignee?.Id?.toString() || "",
+        assignee: (task.assignee?.Id || task.assignee)?.toString() || "",
         estimatedTime: task.estimatedTime?.toString() || "",
         tags: task.tags || []
       });
