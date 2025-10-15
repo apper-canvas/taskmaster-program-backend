@@ -6,6 +6,8 @@ import Badge from "@/components/atoms/Badge";
 import PriorityBadge from "@/components/molecules/PriorityBadge";
 import StatusBadge from "@/components/molecules/StatusBadge";
 
+import { useSelector } from 'react-redux';
+
 export default function TaskItem({ 
   task, 
   projectName,
@@ -15,6 +17,8 @@ export default function TaskItem({
   onDelete,
   onClick
 }) {
+  const currentUser = useSelector((state) => state.user.user);
+  const isOwner = task.assignee?.Id === currentUser?.userId;
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleStatusChange = (newStatus) => {
@@ -123,7 +127,7 @@ export default function TaskItem({
             </div>
 
             {/* Actions */}
-            <div className="flex items-center gap-2">
+<div className="flex items-center gap-2">
               {totalSubtasks > 0 && (
                 <Button
                   variant="ghost"
@@ -133,31 +137,33 @@ export default function TaskItem({
                 />
               )}
               
-              <div className="flex items-center gap-1">
-                {task.status !== "Completed" && (
+              {isOwner && (
+                <div className="flex items-center gap-1">
+                  {task.status !== "Completed" && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      icon="CheckCircle2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleStatusChange("Completed");
+                      }}
+                      className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50"
+                    />
+                  )}
+                  
                   <Button
                     variant="ghost"
                     size="sm"
-                    icon="CheckCircle2"
+                    icon="Trash2"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleStatusChange("Completed");
+                      onDelete();
                     }}
-                    className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50"
+                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
                   />
-                )}
-                
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  icon="Trash2"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete();
-                  }}
-                  className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                />
-              </div>
+                </div>
+              )}
             </div>
           </div>
 
