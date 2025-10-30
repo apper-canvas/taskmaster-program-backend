@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
-import { useSelector } from 'react-redux';
-import Button from "@/components/atoms/Button";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/layouts/Root";
 import ApperIcon from "@/components/ApperIcon";
-import { AuthContext } from '../../App';
+import Button from "@/components/atoms/Button";
 
 export default function Header({ onMobileMenuToggle }) {
-  const { user } = useSelector((state) => state.user);
-  const { logout } = useContext(AuthContext);
-  
+  const navigate = useNavigate();
+  const { logout, user } = useAuth();
   const handleLogout = async () => {
     if (window.confirm('Are you sure you want to logout?')) {
       await logout();
