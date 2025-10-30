@@ -99,8 +99,8 @@ export const router = createBrowserRouter([
         path: 'prompt-password/:appId/:emailAddress/:provider',
         element: <PromptPassword />,
       }),
-      // Protected routes with Layout
-      {
+// Protected routes with Layout
+      createRoute({
         element: <Layout />,
         children: [
           createRoute({
@@ -132,7 +132,7 @@ export const router = createBrowserRouter([
             element: <Settings />,
           }),
         ],
-      },
+      }),
       // NotFound route
       createRoute({
         path: '*',
