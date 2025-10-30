@@ -46,7 +46,7 @@ const createRoute = ({
   if (index) {
     configPath = "/";
   } else {
-    configPath = path.startsWith('/') ? path : `/${path}`;
+configPath = path?.startsWith('/') ? path : (path ? `/${path}` : path);
   }
 
   const config = getRouteConfig(configPath);
